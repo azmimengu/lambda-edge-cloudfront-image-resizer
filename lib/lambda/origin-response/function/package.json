@@ -1,0 +1,25 @@
+{
+  "name": "function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./build/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.37.0",
+    "@aws-sdk/types": "^3.37.0",
+    "@types/aws-lambda": "^8.10.84",
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.1009.0",
+    "querystring": "^0.2.1",
+    "sharp": "^0.29.1",
+    "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.1"
+  }
+}

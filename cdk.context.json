@@ -1,0 +1,35 @@
+{
+  "dev": {
+    "account": "yourAccountId",
+    "frankfurtRegion": "eu-central-1",
+    "virginiaRegion": "us-east-1",
+    "assetsBucket": {
+      "arn": "arn:aws:s3:::dev-assets-bucket",
+      "name": "dev-assets-bucket",
+      "region": "eu-central-1",
+      "regionalDomainName": "dev-assets-bucket.s3.eu-central-1.amazonaws.com"
+    }
+  },
+  "test": {
+    "account": "yourAccountId",
+    "frankfurtRegion": "eu-central-1",
+    "virginiaRegion": "us-east-1",
+    "assetsBucket": {
+      "arn": "arn:aws:s3:::test-assets-bucket",
+      "name": "test-assets-bucket",
+      "region": "eu-central-1",
+      "regionalDomainName": "test-assets-bucket.s3.eu-central-1.amazonaws.com"
+    }
+  },
+  "prod": {
+    "account": "yourAccountId",
+    "frankfurtRegion": "eu-central-1",
+    "virginiaRegion": "us-east-1",
+    "assetsBucket": {
+      "arn": "arn:aws:s3:::prod-assets-bucket",
+      "name": "prod-assets-bucket",
+      "region": "eu-central-1",
+      "regionalDomainName": "assets-bucket.s3.eu-central-1.amazonaws.com"
+    }
+  }
+}
