@@ -9,6 +9,7 @@ import * as lambda from '@aws-cdk/aws-lambda';
 import * as ssm from '@aws-cdk/aws-ssm';
 
 import { getAppEnv, getConfig } from '../config';
+import { CertificateName, DOMAIN_NAME } from '../config/build-config';
 
 export class AssetsCloudfrontDistributionStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -24,10 +25,15 @@ export class AssetsCloudfrontDistributionStack extends cdk.Stack {
       bucketRegionalDomainName: conf.assetsBucket.regionalDomainName,
     });
 
-    const cert = acm.Certificate.fromCertificateArn(this, 'AzmiMenguCert', cdk.Fn.importValue('CertificateArn'));
+    const cert = acm.Certificate.fromCertificateArn(
+      this,
+      CertificateName,
+      cdk.Fn.importValue("CertificateArn")
+    );
 
     const recordName = appEnv == 'prod' ? 'cdn' : `${appEnv}-cdn`;
-    const cdnAlias = appEnv == 'prod' ? 'cdn.azmimengu.com' : `${appEnv}-cdn.azmimengu.com`;
+    const cdnAlias =
+      appEnv == "prod" ? `cdn.${DOMAIN_NAME}` : `${appEnv}-cdn.${DOMAIN_NAME}`;
 
     const viewerRequestLambdaEdgeVersionArn = ssm.StringParameter.fromStringParameterName(this, 'ViewerRequestFunctionVersionEdgeArnParameter', `/${appEnv}/edge-functions/viewer-request/EDGE_ARN`).stringValue;
     const originResponseLambdaEdgeVersionArn = ssm.StringParameter.fromStringParameterName(this, 'OriginResponseFunctionVersionEdgeArnParameter', `/${appEnv}/edge-functions/origin-response/EDGE_ARN`).stringValue;
@@ -57,8 +63,8 @@ export class AssetsCloudfrontDistributionStack extends cdk.Stack {
       comment: 'cdn azmimengu',
     });
 
-    const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
-      domainName: 'azmimengu.com',
+    const hostedZone = route53.HostedZone.fromLookup(this, "HostedZone", {
+      domainName: DOMAIN_NAME,
     });
 
     const distributionRecord = route53.RecordTarget.fromAlias(new route53targets.CloudFrontTarget(distribution));

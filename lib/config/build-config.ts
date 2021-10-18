@@ -1,5 +1,8 @@
 import * as cdk from '@aws-cdk/core';
 
+export const DOMAIN_NAME = "azmimengu.com";
+export const CertificateName = "AzmiMenguCert";
+
 interface Config {
   account: string;
   frankfurtRegion: string;

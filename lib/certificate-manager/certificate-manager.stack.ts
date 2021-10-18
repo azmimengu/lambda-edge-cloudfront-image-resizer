@@ -1,19 +1,20 @@
 import * as cdk from '@aws-cdk/core';
 import * as acm from '@aws-cdk/aws-certificatemanager';
 import * as route53 from '@aws-cdk/aws-route53';
+import { DOMAIN_NAME } from '../config/build-config';
 
 export class CertificateManagerStack extends cdk.Stack {
 
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const hostedZone = route53.HostedZone.fromLookup(this, 'HostedZone', {
-      domainName: 'azmimengu.com',
+    const hostedZone = route53.HostedZone.fromLookup(this, "HostedZone", {
+      domainName: DOMAIN_NAME,
     });
 
-    const cert = new acm.Certificate(this, 'Certificate', {
-      domainName: '*.azmimengu.com',
-      subjectAlternativeNames: ['azmimengu.com'],
+    const cert = new acm.Certificate(this, "Certificate", {
+      domainName: `*.${DOMAIN_NAME}`,
+      subjectAlternativeNames: [DOMAIN_NAME],
       validation: acm.CertificateValidation.fromDns(),
     });
 
